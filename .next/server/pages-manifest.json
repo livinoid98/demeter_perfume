@@ -1,0 +1,15 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/brand": "pages/brand.html",
+  "/collaborate": "pages/collaborate.html",
+  "/cs": "pages/cs.html",
+  "/gift": "pages/gift.html",
+  "/": "pages/index.html",
+  "/login": "pages/login.html",
+  "/product": "pages/product.html",
+  "/signature": "pages/signature.html",
+  "/signup": "pages/signup.html",
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.html"
+}

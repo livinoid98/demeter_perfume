@@ -1,0 +1,52 @@
+@import "./function.scss";
+
+header{
+    @include block-center(1200px);
+    .login-wrap{
+        @include flex(flex, flex-end, center);
+        padding-top:22px;
+        ul{
+            @include flex(flex, flex-end, center);
+            li{
+                @include font(12px, 400, #020202);
+                margin-right:6px;
+            }
+        }
+    }
+    .logo{
+        @include flex(flex, center, center);
+        text-align: center;
+    }
+    nav{
+        @include setSize(100%, 50px);
+        ul{
+            @include setSize(100%, 100%);
+            @include flex(flex, center, center);
+            li{
+                @include font(12px, 500, #020202);
+                margin-top:6px;
+                margin-left:20px;
+                &:first-child{
+                    margin-left:0px;
+                }
+            }
+        }
+    }
+}
+
+footer{
+    @include block-center(1200px);
+    padding-bottom:60px;
+    .footer-up{
+        @include font(14px, 400, #353535);
+        @include flex(flex, space-between, center);
+        border-bottom: 1px solid #DEDEDE;
+        padding:10px;
+    }
+    .footer-down{
+        @include font(12px, 400, #757575);
+        text-align: right;
+        line-height:20px;
+        margin-top:6px;
+    }
+}
