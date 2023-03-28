@@ -1,9 +1,19 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Link from 'next/link';
+import Head from 'next/head';
 
 const cs = () => {
+    let boards = useSelector(state => state.board.boardContents);
     return(
         <>
+            <Head>
+                <title>CS - 당신의 향수를 추천해드립니다.</title>
+                <meta name="description" content="향기의 모든것, 당신의 향기를 추천해드립니다."/>
+                <meta name="keywords" content="향수, 향수추천, cs, faq, 배송, 묶음배송, 상품주문, 무료배송, 교환신청, 환불절차, 해외배송"/>
+                <meta name="og:type" content="website"/>
+                <meta name="og:description" content="향기의 모든것, 당신의 향기를 추천해드립니다."/>
+            </Head>
             <div className="cs_main"></div>
             <div className="faq">
                 <div className="faq_title">
@@ -21,76 +31,17 @@ const cs = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>[배송문의] 주문한 상품 - 배송은 언제 될까요?</td>
-                                <td>관리자</td>
-                                <td>2020-08-21</td>
-                                <td>100098</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>[배송문의] 배송전 취소/주소/컬러/사이즈를 변경하고 싶어요!</td>
-                                <td>관리자</td>
-                                <td>2020-08-28</td>
-                                <td>48233</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>[배송문의] 묶음배송을 히고 싶어요</td>
-                                <td>관리자</td>
-                                <td>2020-08-28</td>
-                                <td>23507</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>[배송문의] 받아온 상품의 불량이나 오배송이 된 경우</td>
-                                <td>관리자</td>
-                                <td>2020-08-28</td>
-                                <td>20573</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>[배송문의] 주문한 상품이 다 오지 않았어요</td>
-                                <td>관리자</td>
-                                <td>2020-08-28</td>
-                                <td>15512</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>[배송문의] 무료배송은 얼마부터인가요?</td>
-                                <td>관리자</td>
-                                <td>2020-08-28</td>
-                                <td>57179</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>[배송문의] 해외배송 주문은 어떻게 하나요?</td>
-                                <td>관리자</td>
-                                <td>2020-08-28</td>
-                                <td>10127</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>[교환/환불] 교환신청은 어떻게 하나요?</td>
-                                <td>관리자</td>
-                                <td>2020-08-28</td>
-                                <td>20183</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>[교환/환불] 취소한 금액이 달라요</td>
-                                <td>관리자</td>
-                                <td>2020-08-28</td>
-                                <td>12217</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>[교환/환불] 환불 절차가 달라요</td>
-                                <td>관리자</td>
-                                <td>2020-08-28</td>
-                                <td>30958</td>
-                            </tr>
+                            {
+                                boards.map((item,idx) => (
+                                    <tr key={idx}>
+                                        <td>{item[0]}</td>
+                                        <td>{item[1]}</td>
+                                        <td>{item[2]}</td>
+                                        <td>{item[3]}</td>
+                                        <td>{item[4]}</td>
+                                    </tr>
+                                ))
+                            }
                         </tbody>
                     </table>
                     <div className="find clearfix">
@@ -101,7 +52,7 @@ const cs = () => {
                         <input type="text"/>
                         <button>검색</button>
                     </div>
-                    <Link href="#"><a><button className="submit">글쓰기</button></a></Link>
+                    <Link href="/board/create"><a><button className="submit">글쓰기</button></a></Link>
                 </div>
             </div>
         </>

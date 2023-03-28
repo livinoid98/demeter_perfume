@@ -28,7 +28,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(173);
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(5998);
-/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9693);
+/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(2828);
 /* harmony import */ var _styles_reset_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(3116);
 /* harmony import */ var _styles_reset_scss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_styles_reset_scss__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _styles_layout_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(7150);
@@ -51,8 +51,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_login_scss__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_styles_login_scss__WEBPACK_IMPORTED_MODULE_18__);
 /* harmony import */ var _styles_signup_scss__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(3000);
 /* harmony import */ var _styles_signup_scss__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_styles_signup_scss__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _styles_create_scss__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(5844);
+/* harmony import */ var _styles_create_scss__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_styles_create_scss__WEBPACK_IMPORTED_MODULE_20__);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([redux_saga__WEBPACK_IMPORTED_MODULE_7__]);
 redux_saga__WEBPACK_IMPORTED_MODULE_7__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -78,17 +81,19 @@ const Layout = ({ Component  })=>{
     const store = (0,redux__WEBPACK_IMPORTED_MODULE_5__.createStore)(_reducers__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z,  false ? 0 : (0,redux__WEBPACK_IMPORTED_MODULE_5__.compose)((0,redux__WEBPACK_IMPORTED_MODULE_5__.applyMiddleware)(sagaMiddleware)));
     const login = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
     const logout = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
-    const loginUIChange = ()=>{
-        const user = store.getState();
-        console.log(user.user.userInfo);
-        if (user.user.userInfo != null) {
-            logout.current.style.display = "flex";
-            login.current.style.display = "none";
-        }
+    const onLogout = ()=>{
+        localStorage.setItem("isLogged", false);
     };
-    store.subscribe(loginUIChange);
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         logout.current.style.display = "none";
+        let isLogged = JSON.parse(localStorage.getItem("isLogged"));
+        if (isLogged == true) {
+            login.current.style.display = "none";
+            logout.current.style.display = "flex";
+        } else {
+            login.current.style.display = "flex";
+            logout.current.style.display = "none";
+        }
     });
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_redux__WEBPACK_IMPORTED_MODULE_4__.Provider, {
         store: store,
@@ -130,6 +135,7 @@ const Layout = ({ Component  })=>{
                                 ref: logout,
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
+                                        onClick: onLogout,
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_3___default()), {
                                             href: "#",
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
@@ -275,7 +281,7 @@ __webpack_async_result__();
 
 /***/ }),
 
-/***/ 9693:
+/***/ 2828:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -287,16 +293,60 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: external "redux"
 var external_redux_ = __webpack_require__(6695);
-;// CONCATENATED MODULE: ./reducers/user.js
+;// CONCATENATED MODULE: ./reducers/board.js
 const initialState = {
-    userInfo: []
+    boardContents: [
+        [
+            1,
+            "[배송문의] 주문한 상품 - 배송은 언제 될까요?",
+            "관리자",
+            "2020-08-21",
+            100098
+        ],
+        [
+            2,
+            "[배송문의] 배송전 취소/주소/컬러/사이즈를 변경하고 싶어요!",
+            "관리자",
+            "2020-08-21",
+            48233
+        ],
+        [
+            3,
+            "[배송문의] 묶음배송을 히고 싶어요",
+            "관리자",
+            "2020-08-23",
+            23507
+        ],
+        [
+            4,
+            "[배송문의] 받아온 상품의 불량이나 오배송이 된 경우",
+            "관리자",
+            "2020-08-28",
+            15512
+        ],
+        [
+            5,
+            "[배송문의] 해외배송 주문은 어떻게 하나요?",
+            "관리자",
+            "2020-08-28",
+            12217
+        ],
+        [
+            6,
+            "[교환/환불] 교환신청은 어떻게 하나요?",
+            "관리자",
+            "2020-08-29",
+            30958
+        ]
+    ]
 };
 const reducer = (state = initialState, action)=>{
     switch(action.type){
-        case "SIGN_UP":
+        case "ADD_FAQ":
             {
                 return {
-                    userInfo: action.user
+                    ...state,
+                    boardContents: state.boardContents.push(action.board)
                 };
             }
         default:
@@ -307,13 +357,13 @@ const reducer = (state = initialState, action)=>{
             }
     }
 };
-/* harmony default export */ const user = (reducer);
+/* harmony default export */ const board = (reducer);
 
 ;// CONCATENATED MODULE: ./reducers/index.js
 
 
 const rootReducer = (0,external_redux_.combineReducers)({
-    user: user
+    board: board
 });
 /* harmony default export */ const reducers = (rootReducer);
 
@@ -328,6 +378,13 @@ const rootReducer = (0,external_redux_.combineReducers)({
 /***/ }),
 
 /***/ 1397:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 5844:
 /***/ (() => {
 
 

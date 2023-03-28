@@ -1,6 +1,7 @@
 {
-  "/_error": "pages/_error.js",
   "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/board/create": "pages/board/create.html",
   "/brand": "pages/brand.html",
   "/collaborate": "pages/collaborate.html",
   "/cs": "pages/cs.html",

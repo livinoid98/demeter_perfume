@@ -1,4 +1,5 @@
 import React, {useRef} from 'react';
+import Head from 'next/head';
 
 const Signature = () => {
     const citrus = useRef();
@@ -42,6 +43,13 @@ const Signature = () => {
 
     return(
         <>
+            <Head>
+                <title>Signature - 당신의 향수를 추천해드립니다.</title>
+                <meta name="description" content="향기의 모든것, 당신의 향기를 추천해드립니다."/>
+                <meta name="keywords" content="향수, 향수추천, citrus, floral, fruity, green, woody, musk, 레몬향, 꽃향기, 과일향, 꽃 향, 로즈우드향, 사향여우딜향 "/>
+                <meta name="og:type" content="website"/>
+                <meta name="og:description" content="향기의 모든것, 당신의 향기를 추천해드립니다."/>
+            </Head>
             <div className="choice">
                 <div className="choice_wrap">
                     <img src="/img/choice_first.png" alt=""/>

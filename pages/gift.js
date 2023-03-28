@@ -1,9 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 
 const Gift = () => {
     return(
         <>
+            <Head>
+                <title>Gift - 당신의 향수를 추천해드립니다.</title>
+                <meta name="description" content="향기의 모든것, 당신의 향기를 추천해드립니다."/>
+                <meta name="keywords" content="향수, 향수추천, 오 뜨로삐깔, 오 드 깜빠뉴 오 드 뜨왈렛뜨, 오 드 시슬리, 세련된 분위기, 스와르 드 륀, 오 뒤 스와르, 이지아"/>
+                <meta name="og:type" content="website"/>
+                <meta name="og:description" content="향기의 모든것, 당신의 향기를 추천해드립니다."/>
+            </Head>
             <div className="gift_wrap_sub clearfix">
                 <div className="side_menu">
                     <div id="nav-icon">

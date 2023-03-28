@@ -12,7 +12,12 @@ const Login = () => {
     });
     const onSubmit = useCallback((e) => {
         e.preventDefault();
+        let authenticatedUser = JSON.parse(localStorage.getItem("user"));
+        if(id == authenticatedUser.id && password == authenticatedUser.password){
+            localStorage.setItem("isLogged", true);
+        }
         
+        window.location.href = "/";
     },[id,password]);
     return(
         <>

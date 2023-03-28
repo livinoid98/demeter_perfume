@@ -38,7 +38,15 @@ const Sign_up = () => {
     },[]);
     const onSubmit = useCallback((e) => {
         e.preventDefault();
-        return dispatch({
+        let user = {
+            id: id,
+            password: password,
+            name: name,
+            phone: phone,
+            email: email,
+        }
+        localStorage.setItem("user", JSON.stringify(user));
+        dispatch({
             type:'SIGN_UP',
             user:{
                 id: id,
@@ -48,6 +56,8 @@ const Sign_up = () => {
                 email: email,
             }
         });
+        alert(`${user.name}님 회원가입을 환영합니다. demeter의 더 많은 혜택을 확인해보세요.`);
+        return window.location.href = "/";
     }, [id, password, name, phone, email]);
     return(
         <>

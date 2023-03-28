@@ -1,8 +1,16 @@
 import React from 'react'
+import Head from 'next/head';
 
 const Brand = () => {
     return(
         <>
+            <Head>
+                <title>Brand - 당신의 향수를 추천해드립니다.</title>
+                <meta name="description" content="향기의 모든것, 당신의 향기를 추천해드립니다."/>
+                <meta name="keywords" content="향수, 향수추천, 데메테르, 공식 몰, 오 드 시슬리, 기억, 따뜻한 향기, "/>
+                <meta name="og:type" content="website"/>
+                <meta name="og:description" content="향기의 모든것, 당신의 향기를 추천해드립니다."/>
+            </Head>
             <div className="brand_main"></div>
             <div className="brand_content">
                 <img src="/img/moment.png" alt=""/>

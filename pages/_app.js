@@ -17,6 +17,7 @@ import "./styles/collaborate.scss";
 import "./styles/cs.scss";
 import "./styles/login.scss";
 import "./styles/signup.scss";
+import "./styles/create.scss";
 
 const Layout = ({Component}) => {
     const sagaMiddleware = createSagaMiddleware();
@@ -27,19 +28,21 @@ const Layout = ({Component}) => {
     const login = useRef();
     const logout = useRef();
 
-    const loginUIChange = () => {
-        const user = store.getState();
-        console.log(user.user.userInfo);
-        if(user.user.userInfo != []){
-            logout.current.style.display = "flex";
-            login.current.style.display = "none";
-        }
-    }
-
-    store.subscribe(loginUIChange);
+    const onLogout = () => {
+        localStorage.setItem("isLogged", false);
+    };
 
     useEffect(() => {
         logout.current.style.display = "none";
+
+        let isLogged = JSON.parse(localStorage.getItem("isLogged"));
+        if(isLogged == true){
+            login.current.style.display = "none";
+            logout.current.style.display = "flex";
+        }else{
+            login.current.style.display = "flex";
+            logout.current.style.display = "none";
+        }
     });
 
     return(
@@ -54,7 +57,7 @@ const Layout = ({Component}) => {
                         <li><Link href="/signup"><a>SIGN UP</a></Link></li>
                     </ul>
                     <ul className="logout" ref={logout}>
-                        <li><Link href="#"><a>LOGOUT</a></Link></li>
+                        <li onClick={onLogout}><Link href="#"><a>LOGOUT</a></Link></li>
                         <li><Link href="#"><a>MYPAGE</a></Link></li>
                     </ul>
                 </div>
