@@ -1,6 +1,11 @@
 import React, {useRef, useEffect} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import {Provider} from 'react-redux';
+import {createStore, compose, applyMiddleware} from 'redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import createSagaMiddleware from 'redux-saga';
+import reducer from "../reducers";
 import "./styles/reset.scss";
 import "./styles/layout.scss";
 import "./styles/styles.scss";
@@ -14,15 +19,31 @@ import "./styles/login.scss";
 import "./styles/signup.scss";
 
 const Layout = ({Component}) => {
+    const sagaMiddleware = createSagaMiddleware();
+    const store = createStore(reducer, typeof window != 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    ? composeWithDevTools(applyMiddleware(sagaMiddleware))
+    : compose(applyMiddleware(sagaMiddleware)));
+
     const login = useRef();
     const logout = useRef();
+
+    const loginUIChange = () => {
+        const user = store.getState();
+        console.log(user.user.userInfo);
+        if(user.user.userInfo != []){
+            logout.current.style.display = "flex";
+            login.current.style.display = "none";
+        }
+    }
+
+    store.subscribe(loginUIChange);
 
     useEffect(() => {
         logout.current.style.display = "none";
     });
-    
+
     return(
-        <>
+        <Provider store={store}>
             <Head>
                 <title>Demeter - 당신의 향수를 추천해드립니다.</title>
             </Head>
@@ -30,9 +51,9 @@ const Layout = ({Component}) => {
                 <div className="login-wrap">
                     <ul className='login' ref={login}>
                         <li><Link href="/login"><a>LOGIN</a></Link></li>
-                        <li><Link href="#"><a>JOIN US</a></Link></li>
+                        <li><Link href="/signup"><a>SIGN UP</a></Link></li>
                     </ul>
-                    <ul class="logout" ref={logout}>
+                    <ul className="logout" ref={logout}>
                         <li><Link href="#"><a>LOGOUT</a></Link></li>
                         <li><Link href="#"><a>MYPAGE</a></Link></li>
                     </ul>
@@ -74,8 +95,9 @@ const Layout = ({Component}) => {
                 </div>
             </footer>
             
-        </>
+        </Provider>
     );
 }
+
 
 export default Layout;

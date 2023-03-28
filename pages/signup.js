@@ -1,7 +1,9 @@
 import React, {useState, useCallback} from 'react'
+import {useDispatch} from 'react-redux';
 import Link from 'next/link'
 
 const Sign_up = () => {
+    const dispatch = useDispatch();
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
@@ -36,6 +38,16 @@ const Sign_up = () => {
     },[]);
     const onSubmit = useCallback((e) => {
         e.preventDefault();
+        return dispatch({
+            type:'SIGN_UP',
+            user:{
+                id: id,
+                password: password,
+                name: name,
+                phone: phone,
+                email: email,
+            }
+        });
     }, [id, password, name, phone, email]);
     return(
         <>
